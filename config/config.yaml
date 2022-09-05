@@ -1,7 +1,7 @@
 ###############
 # STEPS
 # steps: ["imp", "taxonomy", "integron", "metachip", "waafle"]
-steps: ["Binning", "MDM_cleaner", "checkM", "GTDB_taxonomy", "coverage"]       #TODO: metachip, spades
+steps: ["Binning", "MDM_cleaner", "checkM", "GTDBtk", "coverage"]       #TODO: metachip, spades
 
 
 ##############
