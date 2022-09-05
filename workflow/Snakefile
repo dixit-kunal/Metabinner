@@ -1,0 +1,94 @@
+# Pipeline for additional processing of mice-AMR datasets after IMP runs for HGT events
+#
+# Example call: snakemake -s workflow/Snakefile --configfile config/config.yaml --use-conda --conda-prefix ${CONDA_PREFIX}/pipeline --cores 1 -rpn
+# Example call (esb-compute-01 or litcrit): CORES=24 snakemake -s workflow/Snakefile --configfile config/config.yaml --use-conda --conda-prefix ${CONDA_PREFIX}/pipeline --cores $CORES -rpn
+
+##############################
+# MODULES
+import os, re
+import glob
+import pandas as pd
+
+# importing specific scripts for parsing etc.
+# from scripts.utils import find_fast5, assembler_pairs
+
+##############################
+# CONFIG
+# can be overwritten by using --configfile <path to config> when calling snakemake
+# configfile: "config/config.yaml"
+
+include:
+    "rules/init.smk"
+
+# print("no basecalling: {}".format(NO_BASECALLING))
+# print(INPUT_LINKS)
+
+
+##############################
+# TARGETS & RULES
+
+# List of (main) targets to be created
+TARGETS = []
+
+# Include rules and add targets based on the config file
+# include:
+#    "rules/setup.smk"
+
+# TARGETS.append("status/prepare_input.done") # TEST
+
+# IMP
+if "imp" in STEPS:
+    include:
+        "rules/imp_snakefile.smk"
+    TARGETS += [
+        "status/imp.done"
+    ]
+
+# TAXONOMY
+if "taxonomy" in STEPS:
+    include:
+        "rules/taxonomy_snakefile.smk"
+    TARGETS += [
+        "status/taxonomy.done"
+    ]
+
+# INTEGRONS
+if "integron" in STEPS:
+    include:
+        "rules/integron_snakefile.smk"
+    TARGETS += [
+        "status/integron.done"
+    ]
+
+# METACHIP
+if "metachip" in STEPS:
+    include:
+        "rules/metachip_snakefile.smk"
+    TARGETS += [
+        "status/metachip.done"
+    ]
+
+# WAAFLE
+if "waafle" in STEPS:
+    include:
+        "rules/waafle_snakefile.smk"
+    TARGETS += [
+        "status/waafle.done"
+    ]
+
+# METASPADES - plasmid and viral
+if "spades" in STEPS:
+    include:
+        "rules/spades_snakefile.smk"
+    TARGETS += [
+        "status/spades.done"
+    ]
+
+
+# No targets
+if len(TARGETS) == 0:
+    raise Exception('You are not serious. Nothing to be done? Really?')
+
+rule all:
+    input:
+        TARGETS
