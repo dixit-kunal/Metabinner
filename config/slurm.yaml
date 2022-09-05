@@ -1,1 +1,30 @@
+__default__:
+    time: "0-01:00:00"
+    partition: "batch"
+    qos: "normal"
+    nodes: 1
+    n: 1
+    explicit: ""
+    job-name: "mmrrc.{rule}"
 
+gtdbtk:
+    time: "00-6:00:00"
+    partition: "bigmem"     
+    qos: "normal"
+    nodes: 1
+    n: 1
+
+checkm:
+    time: "00-12:00:00"
+
+eukulele:
+    time: "0-12:00:00"
+    partition: "batch"
+    qos: "normal"
+    nodes: 1
+    n: 1
+    explicit: ""
+
+#checkm_plot:
+#    partition: "bigmem"
+#    time: "00-4:00:00"
