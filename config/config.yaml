@@ -1,19 +1,19 @@
 ###############
 # STEPS
 # steps: ["imp", "taxonomy", "integron", "metachip", "waafle"]
-steps: ["taxonomy", "waafle"]       #TODO: metachip, spades
+steps: ["Binning", "MDM_cleaner", "checkM", "GTDB_taxonomy", "coverage"]       #TODO: metachip, spades
 
 
 ##############
 # INPUT
 # Directory where fastq files are
-data_dir: "/work/projects/amrwd/mice_amr_2021/fastq/IMP3/metachip"
+data_dir: "/mnt/lscratch/users/kdixit/rawdata/stool/"
 
-# Directory where the IMP output is stored
-imp_dir: "/work/projects/amrwd/mice_amr_2021/fastq/IMP3"
+# Directory where the assemblies are stored
+imp_dir: "/mnt/lscratch/users/kdixit/rawdata/stool_assemblies/"
 
 # Directory to save the output to
-results_dir: "/work/projects/amrwd/mice_amr_2021/fastq/IMP3/metachip/results"
+results_dir: "/mnt/lscratch/users/kdixit/rawdata/stool_results"
 
 # Directory where the METASPADES results are stored
 spades_results: "/work/projects/amrwd/mice_amr_2021/fastq/IMP3/metaspades_results"
