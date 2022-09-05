@@ -1,1 +1,59 @@
+###############
+# STEPS
+# steps: ["imp", "taxonomy", "integron", "metachip", "waafle"]
+steps: ["taxonomy", "waafle"]       #TODO: metachip, spades
 
+
+##############
+# INPUT
+# Directory where fastq files are
+data_dir: "/work/projects/amrwd/mice_amr_2021/fastq/IMP3/metachip"
+
+# Directory where the IMP output is stored
+imp_dir: "/work/projects/amrwd/mice_amr_2021/fastq/IMP3"
+
+# Directory to save the output to
+results_dir: "/work/projects/amrwd/mice_amr_2021/fastq/IMP3/metachip/results"
+
+# Directory where the METASPADES results are stored
+spades_results: "/work/projects/amrwd/mice_amr_2021/fastq/IMP3/metaspades_results"
+
+##############
+# TOOLS and parameters
+# Number of cpus or threads to use
+threads: 10
+
+###
+# KRAKEN2
+# Path to the the 140GB Kraken2 database
+kraken2_database: "/scratch/users/bkunath/Kraken2/maxikraken2_1903_140GB/"
+
+###
+# DASTool
+DAS_Tool:
+  path: "/home/users/sbusi/apps/DAS_Tool-master"
+  bin: "/home/users/sbusi/apps/DAS_Tool-master/src/"
+
+# Path to DAS_Tool database
+dastool_database: "/home/users/sbusi/apps/DAS_Tool-master/db/"
+
+# Taxonomy - GTDBTK
+GTDBTK:
+  DATA: "/work/projects/ecosystem_biology/databases/gtdbtk/release95"
+
+# MetaCHIP
+METACHIP:
+  path: "/home/users/sbusi/apps/metachip/bin"
+  anvio_path: "/scratch/users/sbusi/tools/miniconda3/envs/anvio-7/bin"
+  threads: 8
+
+# WAAFLE
+WAAFLE:
+  threads: 8
+  db: "/scratch/users/ldenies/mice_AMR_main/MICE_WAAFLE/waafledb/waafledb"
+  taxonomy: "/scratch/users/ldenies/mice_AMR_main/MICE_WAAFLE/waafledb_taxonomy.tsv"
+
+# METASPADES
+# https://github.com/ablab/spades
+metaspades:
+  threads: 8
