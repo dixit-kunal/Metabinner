@@ -16,6 +16,7 @@ chmod u+x Miniconda3-latest-Linux-x86_64.sh
 Getting the repository including sub-modules
 ```bash
 git clone https://github.com/dixit-kunal/Metabinner.git
+cd Metabinner
 ```
 
 Create the main `snakemake` environment
