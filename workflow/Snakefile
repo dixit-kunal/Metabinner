@@ -1,4 +1,4 @@
-# Pipeline for additional processing of mice-AMR datasets after IMP runs for HGT events
+# Pipeline for binning
 #
 # Example call: snakemake -s workflow/Snakefile --configfile config/config.yaml --use-conda --conda-prefix ${CONDA_PREFIX}/pipeline --cores 1 -rpn
 # Example call (esb-compute-01 or litcrit): CORES=24 snakemake -s workflow/Snakefile --configfile config/config.yaml --use-conda --conda-prefix ${CONDA_PREFIX}/pipeline --cores $CORES -rpn
@@ -7,6 +7,7 @@
 # MODULES
 import os, re
 import glob
+import shutil
 import pandas as pd
 
 # importing specific scripts for parsing etc.
@@ -30,60 +31,45 @@ include:
 # List of (main) targets to be created
 TARGETS = []
 
-# Include rules and add targets based on the config file
-# include:
-#    "rules/setup.smk"
-
-# TARGETS.append("status/prepare_input.done") # TEST
-
-# IMP
-if "imp" in STEPS:
+# BINNING
+if "bining" in STEPS:
     include:
-        "rules/imp_snakefile.smk"
+        "rules/binning.smk"
     TARGETS += [
-        "status/imp.done"
+        "status/binning.done"
     ]
 
-# TAXONOMY
-if "taxonomy" in STEPS:
+# MDM Cleaner
+if "mdmcleaner" in STEPS:
     include:
-        "rules/taxonomy_snakefile.smk"
+        "rules/mdmcleaner.smk"
     TARGETS += [
-        "status/taxonomy.done"
+        "status/mdmcleaner.done"
     ]
 
-# INTEGRONS
-if "integron" in STEPS:
+#CheckM 
+if "checkm" in STEPS:
     include:
-        "rules/integron_snakefile.smk"
+        "rules/checkm.smk"
     TARGETS += [
-        "status/integron.done"
+        "status/checkm.done"
     ]
 
-# METACHIP
-if "metachip" in STEPS:
+# GTDBTK
+if "gtdbtk" in STEPS:
     include:
-        "rules/metachip_snakefile.smk"
+        "rules/gtdbtk.smk"
     TARGETS += [
-        "status/metachip.done"
+        "status/gtdbtk.done"
     ]
 
-# WAAFLE
-if "waafle" in STEPS:
+# COVERAGE
+if "coverage" in STEPS:
     include:
-        "rules/waafle_snakefile.smk"
+        "rules/coverage.smk"
     TARGETS += [
-        "status/waafle.done"
+        "status/coverage.done"
     ]
-
-# METASPADES - plasmid and viral
-if "spades" in STEPS:
-    include:
-        "rules/spades_snakefile.smk"
-    TARGETS += [
-        "status/spades.done"
-    ]
-
 
 # No targets
 if len(TARGETS) == 0:
