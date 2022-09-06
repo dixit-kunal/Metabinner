@@ -14,7 +14,7 @@ rule metaspades:
     output:
         os.path.join(RESULTS_DIR, "Assembly/{sample}/scaffolds.fasta")
     log:
-        os.path.join(RESULTS_DIR, "logs/Assembly/{sample}.log)
+        os.path.join(RESULTS_DIR, "logs/Assembly/{sample}.log")
     conda:
         os.path.join(ENV_DIR, "spades.yaml")
     threads:

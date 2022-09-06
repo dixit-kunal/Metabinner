@@ -31,7 +31,7 @@ workdir:
 # Relevant directories
 ASSEMBLY_DIR = config["assembly_dir"]
 DB_DIR = config["db_dir"]
-READ_DIR = config["read_dir"]
+READS_DIR = config["read_dir"]
 RESULTS_DIR = config["results_dir"]
 
 
