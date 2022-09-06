@@ -71,6 +71,14 @@ if "coverage" in STEPS:
         "status/coverage.done"
     ]
 
+# ABUNDANCE
+if "abundance" in STEPS:
+    include:
+        "rules/abundance.smk"
+    TARGETS += [
+        "status/abundance.done"
+    ]
+
 # No targets
 if len(TARGETS) == 0:
     raise Exception('You are not serious. Nothing to be done? Really?')

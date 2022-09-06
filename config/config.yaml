@@ -1,7 +1,7 @@
 ###############
 # STEPS
-#steps: ["binning", "mdmcleaner", "checkm", "gtdbtk", "coverage"]       #TODO: metachip, spades
-steps: "binning"
+#steps: ["coverage", "binning", "mdmcleaner", "checkm", "gtdbtk", "abundance"]       #TODO: metachip, spades
+steps: "coverage"
 
 ##############
 # INPUT
