@@ -1,7 +1,7 @@
 ###############
 # STEPS
-#steps: ["coverage", "binning", "mdmcleaner", "checkm", "gtdbtk", "abundance"]       #TODO: metachip, spades
-steps: "coverage"
+#steps: ["assembly", "coverage", "binning", "mdmcleaner", "checkm", "gtdbtk", "abundance"]       #TODO: metachip, spades
+steps: "assembly"
 
 ##############
 # INPUT
@@ -27,6 +27,9 @@ env_dir: "/scratch/users/kdixit/gitrepos/Metabinner/envs"
 # TOOLS and parameters
 # Number of cpus or threads to use
 threads: 28
+
+spades:
+    threads: 4
 
 filter_length:
     threads: 4

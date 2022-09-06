@@ -31,6 +31,14 @@ include:
 # List of (main) targets to be created
 TARGETS = []
 
+# ASSEMBLY
+if "assembly" in STEPS:
+    include:
+        "rules/assembly.smk"
+    TARGETS += [
+        "status/assembly.done"
+    ]
+
 # BINNING
 if "bining" in STEPS:
     include:
