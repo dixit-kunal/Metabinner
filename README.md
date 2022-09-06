@@ -30,8 +30,8 @@ conda env create -f envs/requirements.yaml -n "snakemake"
 
 * Place your preprocessed/trim reads (e.g. `sample_R2.fastq.gz` and `sample_R2.fastq.gz` files) in a `reads` folder
 * Place the individual assemblies (e.g. `sample.fasta`) into an `assembly` folder
-* Modify the `config.yaml` file to change the different paths and eventually the different options
-* Modify the `sample_list.txt` file to include your samples
+* Modify the `config/config.yaml` file to change the different paths and eventually the different options
+* Modify the `config/sample_list.txt` file to include your samples
 
 ### Without Slurm
 
@@ -39,8 +39,8 @@ conda env create -f envs/requirements.yaml -n "snakemake"
 
 ### With Slurm
 
-* Modify the `slurm.yaml` file by checking `partition`, `qos` and `account` that heavily depends on your system
-* Modify the `sbatch.sh` file by checking `#SBATCH -p`, `#SBATCH --qos=` and `#SBATCH -A` options that heavily depends on your system
+* Modify the `config/slurm.yaml` file by checking `partition`, `qos` and `account` that heavily depends on your system
+* Modify the `config/sbatch.sh` file by checking `#SBATCH -p`, `#SBATCH --qos=` and `#SBATCH -A` options that heavily depends on your system
 
 `sbatch config/sbatch.sh`
 
