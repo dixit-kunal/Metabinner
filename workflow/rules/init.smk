@@ -4,7 +4,6 @@ import os, re
 import sys
 import glob
 import pandas as pd
-from Bio import SeqIO
 
 # ##############################
 # # Parameters
