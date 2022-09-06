@@ -5,14 +5,23 @@ steps: "binning"
 
 ##############
 # INPUT
+# working_directory
+work_dir: "/scratch/users/kdixit/gitrepos/Metabinner"
+
 # Directory where fastq files are
-data_dir: "/mnt/lscratch/users/kdixit/rawdata/stool"
+read_dir: "/mnt/lscratch/users/kdixit/rawdata/stool"
 
 # Directory where the assemblies are stored
 assembly_dir: "/mnt/lscratch/users/kdixit/rawdata/stool_assemblies"
 
 # Directory to save the output to
 results_dir: "/mnt/lscratch/users/kdixit/metabinner_results/stool_results"
+
+# Directory with databases
+db_dir: "/scratch/users/gmichoud/DB"
+
+# Directory with conda envs
+env_dir: "/scratch/users/kdixit/gitrepos/Metabinner/envs"
 
 ##############
 # TOOLS and parameters
