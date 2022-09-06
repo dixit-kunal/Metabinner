@@ -1,59 +1,54 @@
 ###############
 # STEPS
-# steps: ["imp", "taxonomy", "integron", "metachip", "waafle"]
-steps: ["Binning", "MDM_cleaner", "checkM", "GTDBtk", "coverage"]       #TODO: metachip, spades
-
+#steps: ["binning", "mdmcleaner", "checkm", "gtdbtk", "coverage"]       #TODO: metachip, spades
+steps: "binning"
 
 ##############
 # INPUT
 # Directory where fastq files are
-data_dir: "/mnt/lscratch/users/kdixit/rawdata/stool/"
+data_dir: "/mnt/lscratch/users/kdixit/rawdata/stool"
 
 # Directory where the assemblies are stored
-imp_dir: "/mnt/lscratch/users/kdixit/rawdata/stool_assemblies/"
+assembly_dir: "/mnt/lscratch/users/kdixit/rawdata/stool_assemblies"
 
 # Directory to save the output to
-results_dir: "/mnt/lscratch/users/kdixit/rawdata/stool_results"
-
-# Directory where the METASPADES results are stored
-spades_results: "/work/projects/amrwd/mice_amr_2021/fastq/IMP3/metaspades_results"
+results_dir: "/mnt/lscratch/users/kdixit/metabinner_results/stool_results"
 
 ##############
 # TOOLS and parameters
 # Number of cpus or threads to use
-threads: 10
+threads: 28
 
-###
-# KRAKEN2
-# Path to the the 140GB Kraken2 database
-kraken2_database: "/scratch/users/bkunath/Kraken2/maxikraken2_1903_140GB/"
+filter_length:
+    threads: 4
+    
+mdmcleaner:
+    threads: 7
 
-###
-# DASTool
-DAS_Tool:
-  path: "/home/users/sbusi/apps/DAS_Tool-master"
-  bin: "/home/users/sbusi/apps/DAS_Tool-master/src/"
+mapping:
+    threads: 7
 
-# Path to DAS_Tool database
-dastool_database: "/home/users/sbusi/apps/DAS_Tool-master/db/"
+metabat2:
+    threads: 14
 
-# Taxonomy - GTDBTK
-GTDBTK:
-  DATA: "/work/projects/ecosystem_biology/databases/gtdbtk/release95"
+concoct:
+    threads: 14
 
-# MetaCHIP
-METACHIP:
-  path: "/home/users/sbusi/apps/metachip/bin"
-  anvio_path: "/scratch/users/sbusi/tools/miniconda3/envs/anvio-7/bin"
-  threads: 8
+metabinner:
+    length: 2000
+    threads: 14
 
-# WAAFLE
-WAAFLE:
-  threads: 8
-  db: "/scratch/users/ldenies/mice_AMR_main/MICE_WAAFLE/waafledb/waafledb"
-  taxonomy: "/scratch/users/ldenies/mice_AMR_main/MICE_WAAFLE/waafledb_taxonomy.tsv"
+dasTool:
+    threads: 14
 
-# METASPADES
-# https://github.com/ablab/spades
-metaspades:
-  threads: 8
+checkM:
+    threads: 14
+
+dRep:
+    threads: 28
+    comp: 70
+    cont: 10
+
+gtdbtk:
+    threads: 14
+    path: "/scratch/users/gmichoud/DB/release207_v2"

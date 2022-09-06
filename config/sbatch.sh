@@ -4,11 +4,11 @@
 # SLURM
 # NOTE: used for this script only, NOT for the snakemake call below
 
-#SBATCH -J AE_euk
+#SBATCH -J binning
 #SBATCH -N 1
 #SBATCH -n 1
 #SBATCH -c 1
-#SBATCH --time=4-00:00:00
+#SBATCH --time=2-00:00:00
 #SBATCH -p batch
 #SBATCH --qos=qos-batch
 
@@ -18,11 +18,11 @@
 # conda env name
 SMK_ENV="snakemake" # USER INPUT REQUIRED
 # number of cores for snakemake
-SMK_CORES=6
+SMK_CORES=60
 # number of jobs for snakemake
-SMK_JOBS=6
+SMK_JOBS=20
 # snakemake file
-SMK_SMK="eukaryote_snakefile.smk"
+SMK_SMK="workflow/Snakefile"
 # config file
 SMK_CONFIG="config/config.yaml" # USER INPUT REQUIRED
 # slurm config file
@@ -32,7 +32,7 @@ SMK_CLUSTER="sbatch -p {cluster.partition} -q {cluster.qos} {cluster.explicit} -
 
 
 ##############################
-# IMP
+#BINNING
 
 # activate the env
 conda activate ${SMK_ENV}
