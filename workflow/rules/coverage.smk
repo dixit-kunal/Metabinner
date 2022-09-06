@@ -9,7 +9,7 @@ rule coverage:
 
 rule filter_length:
     input:
-        cont=os.path.join(ASSEMBLY_DIR, "{sample}.fasta")
+        cont=os.path.join(RESULTS_DIR, "Assembly/{sample}/scaffolds.fasta")
     output:
         os.path.join(RESULTS_DIR, "Assembly/{sample}_filter.fasta")
     conda:
