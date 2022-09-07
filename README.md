@@ -28,7 +28,7 @@ conda env create -f envs/requirements.yaml -n "snakemake"
 
 ## Setup
 
-* Place your preprocessed/trim reads (e.g. `sample_R2.fastq.gz` and `sample_R2.fastq.gz` files) in a `reads` folder
+* Place your preprocessed/trim reads (e.g. `sample_R1.fastq.gz` and `sample_R2.fastq.gz` files) in a `reads` folder
 * Place the individual assemblies (e.g. `sample.fasta`) into an `assembly` folder
 * Modify the `config/config.yaml` file to change the different paths and eventually the different options
 * Modify the `config/sample_list.txt` file to include your samples
