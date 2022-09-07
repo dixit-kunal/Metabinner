@@ -14,7 +14,8 @@ rule metaspades:
     output:
         os.path.join(RESULTS_DIR, "Assembly/{sample}/scaffolds.fasta")
     log:
-        os.path.join(RESULTS_DIR, "logs/Assembly/{sample}.log")
+        out=os.path.join(RESULTS_DIR, "logs/Assembly/{sample}.out.log"),
+        err=os.path.join(RESULTS_DIR, "logs/Assembly/{sample}.err.log")
     conda:
         os.path.join(ENV_DIR, "spades.yaml")
     threads:
@@ -22,4 +23,5 @@ rule metaspades:
     message:
         "Running metaSPADES on {wildcards.sample}"
     shell:
-        "(date && metaspades.py -k 21,33,55,77 -t {threads} -1 {input.read1} -2 {input.read2} -o $(dirname {output} && date) &> {log}"
+        "(date && metaspades.py -k 21,33,55,77 -t {threads} -1 {input.read1} -2 {input.read2} -o $(dirname {output}) && date) 2> {log.err} > {log.out}"
+ 
