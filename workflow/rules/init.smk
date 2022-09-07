@@ -42,5 +42,5 @@ STEPS = config["steps"]
 
 ##############################
 # Input
-SAMPLES = [line.strip() for line in open("config/test_list.txt").readlines()]
+SAMPLES = [line.strip() for line in open("config/stool_list.txt").readlines()]
 SAMPLES_2 = SAMPLES
