@@ -29,7 +29,7 @@ env_dir: "/scratch/users/kdixit/gitrepos/Metabinner/envs"
 threads: 28
 
 spades:
-    threads: 4
+    threads: 6
 
 filter_length:
     threads: 4

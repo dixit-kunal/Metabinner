@@ -4,13 +4,14 @@ rule binning:
     input:
         expand(os.path.join(RESULTS_DIR, "Bins/{sample}/Metabat"), sample=SAMPLES),
         expand(os.path.join(RESULTS_DIR,"Bins/{sample}/Concoct/concoct_clustering_merged.csv"), sample=SAMPLES),
+        expand(os.path.join(RESULTS_DIR, "Bins/{sample}/Metabinner/metabinner_result.tsv"), sample=SAMPLES)
     output:
         os.path.join("status/binning.done")
 
 
 rule metabat2_mapping:
     input:
-        expand(os.path.join(RESULTS_DIR,"Bam/{{sample}}/{{sample}}_{sample_2}.bam"), sample_2 = SAMPLES_2)
+        expand(os.path.join(RESULTS_DIR, "Bam/{sample}/{sample}.bam"), sample = SAMPLES)
     output:
         os.path.join(RESULTS_DIR,"Bins/{sample}/{sample}_metabat_cov.txt")
     conda:
@@ -50,7 +51,7 @@ rule metabat2:
 rule concoct_prepare:
     input:
         contig=rules.filter_length.output,
-        bam=expand(os.path.join(RESULTS_DIR,"Bam/{{sample}}/{{sample}}_{sample_2}.bam"), sample_2 = SAMPLES_2)
+        bam=expand(os.path.join(RESULTS_DIR, "Bam/{sample}/{sample}.bam"), sample = SAMPLES)
     output:
         bed=os.path.join(RESULTS_DIR,"Bins/{sample}/{sample}_10k.bed"),
         cont=os.path.join(RESULTS_DIR,"Bins/{sample}/{sample}_10k.fa"),
@@ -101,7 +102,7 @@ rule metabinner_install:
 
 rule metabinner_coverage:
     input:
-        expand(os.path.join(RESULTS_DIR,"Bam/{{sample}}/{{sample}}_{sample_2}.bam"), sample_2 = SAMPLES_2)
+        expand(os.path.join(os.path.join(RESULTS_DIR, "Bam/{sample}/{sample}.bam"), sample = SAMPLES)
     output:
         temp=temp(os.path.join(RESULTS_DIR,"Bins/{sample}/{sample}_metabinner_temp.txt")),
         final=os.path.join(RESULTS_DIR,"Bins/{sample}/{sample}_metabinner_cov.txt")
