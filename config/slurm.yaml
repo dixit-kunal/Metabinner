@@ -12,10 +12,10 @@ __default__:
 
 
 metaspades:
-  time: "00-12:00:00"
+  time: "02-00:00:00"
   partition: "bigmem"
   qos: "normal"
-  cpu-per-task: 4
+  cpu-per-task: 6
   nodes: 1
   n: 1
 
