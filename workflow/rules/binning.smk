@@ -30,7 +30,7 @@ rule metabat2_mapping:
 
 rule metabat2:
     input:
-        contig=rules.filter_length.output,
+        contig=os.path.join(RESULTS_DIR, "Assembly/{sample}_filter.fasta"),
         cov=rules.metabat2_mapping.output
     output:
         directory(os.path.join(RESULTS_DIR,"Bins/{sample}/Metabat/"))
@@ -50,7 +50,7 @@ rule metabat2:
 
 rule concoct_prepare:
     input:
-        contig=rules.filter_length.output,
+        contig=os.path.join(RESULTS_DIR, "Assembly/{sample}_filter.fasta"),         
         bam=expand(os.path.join(RESULTS_DIR, "Bam/{sample}/{sample}.bam"), sample = SAMPLES)
     output:
         bed=os.path.join(RESULTS_DIR,"Bins/{sample}/{sample}_10k.bed"),
@@ -102,7 +102,7 @@ rule metabinner_install:
 
 rule metabinner_coverage:
     input:
-        expand(os.path.join(os.path.join(RESULTS_DIR, "Bam/{sample}/{sample}.bam"), sample = SAMPLES)
+        expand(os.path.join(RESULTS_DIR, "Bam/{sample}/{sample}.bam"), sample = SAMPLES)
     output:
         temp=temp(os.path.join(RESULTS_DIR,"Bins/{sample}/{sample}_metabinner_temp.txt")),
         final=os.path.join(RESULTS_DIR,"Bins/{sample}/{sample}_metabinner_cov.txt")
@@ -125,7 +125,7 @@ rule metabinner_coverage:
 
 rule metabinner_prepare:
     input:
-        contig=rules.filter_length.output,
+        contig=os.path.join(RESULTS_DIR, "Assembly/{sample}_filter.fasta"),
         bin=rules.metabinner_install.output.dbs
     output:
         cont_t=temp(RESULTS_DIR + "/Assembly" + "/{sample}_filter_" + str(config["metabinner"]["length"]) + ".fa"),        
