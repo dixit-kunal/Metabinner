@@ -42,7 +42,7 @@ rule mapping:
         cont=rules.filter_length.output,
         idx=rules.mapping_index.output
     output:
-        os.path.join(RESULTS_DIR,"Bam/{sample}/{sample}.bam")
+        os.path.join(RESULTS_DIR, "Bam/{sample}/{sample}.bam")
     threads:
         config["mapping"]["threads"]
     conda:
