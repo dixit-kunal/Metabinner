@@ -1,0 +1,7 @@
+me: concoct
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - concoct=1.1.0

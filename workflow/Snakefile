@@ -40,7 +40,7 @@ if "assembly" in STEPS:
     ]
 
 # BINNING
-if "bining" in STEPS:
+if "binning" in STEPS:
     include:
         "rules/binning.smk"
     TARGETS += [
