@@ -1,7 +1,7 @@
 ###############
 # STEPS
 #steps: ["assembly", "coverage", "binning", "mdmcleaner", "checkm", "gtdbtk", "abundance"]       #TODO: metachip, spades
-steps: ["assembly", "coverage", "binning"]
+steps: "coverage" # ["assembly", "coverage", "binning"]
 
 ##############
 # INPUT
