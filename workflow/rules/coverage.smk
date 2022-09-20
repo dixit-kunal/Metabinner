@@ -23,7 +23,7 @@ rule filter_length:
 
 rule concatanate_filtered:
     input:
-        expand(os.path.join(RESULTS_DIR, "Assembly/{sample}_filter.fasta"), sample=SAMPLES))
+        expand(os.path.join(RESULTS_DIR, "Assembly/{sample}_filter.fasta"), sample=SAMPLES)
     output:
         os.path.join(RESULTS_DIR, "Assembly/concatanated_filter.fasta")
     message:
