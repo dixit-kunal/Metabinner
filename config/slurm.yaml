@@ -19,6 +19,14 @@ metaspades:
   nodes: 1
   n: 1
 
+mapping_index:
+  time: "00-12:00:00"
+  partition: "batch"
+  qos: "normal"
+  cpu-per-task: 24
+  nodes: 1
+  n: 1
+
 mapping:
   time: "00-12:00:00"
   partition: "batch"
