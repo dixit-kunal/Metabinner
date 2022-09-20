@@ -40,6 +40,8 @@ rule mapping_index:
         os.path.join(RESULTS_DIR, "logs/mapping/concatanated_mapping.bwa.index.log")
     conda:
         os.path.join(ENV_DIR, "mapping.yaml")
+    threads:
+       config["threads"]
     message:
         "Mapping: BWA index for assembly mapping"
     shell:

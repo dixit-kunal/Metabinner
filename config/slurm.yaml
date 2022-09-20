@@ -23,7 +23,7 @@ mapping_index:
   time: "00-12:00:00"
   partition: "batch"
   qos: "normal"
-  cpu-per-task: 24
+  cpu-per-task: 28
   nodes: 1
   n: 1
 
