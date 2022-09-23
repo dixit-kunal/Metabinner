@@ -134,6 +134,8 @@ rule metabinner_prepare:
         kmer=RESULTS_DIR + "/Bins/{sample}/{sample}_kmer_4_f" + str(config["metabinner"]["length"]) + ".csv"
     conda:
         os.path.join(ENV_DIR, "metabinner.yaml")
+    threads:
+        config["metabinner"]["threads"]
     log:
         out=os.path.join(RESULTS_DIR, "logs/metabinner_prepare/{sample}.out.log"),
         err=os.path.join(RESULTS_DIR, "logs/metabinner_prepare/{sample}.err.log")
