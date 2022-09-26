@@ -51,7 +51,7 @@ rule metabat2:
 rule concoct_prepare:
     input:
         contig=os.path.join(RESULTS_DIR, "Assembly/concatanated_filter.fasta"),         
-        bam=expand(os.path.join(RESULTS_DIR, "Bam/{sample}/{sample}.bam"), sample = SAMPLES)
+        bam=os.path.join(RESULTS_DIR, "Bam/{sample}/{sample}.bam")
     output:
         bed=os.path.join(RESULTS_DIR,"Bins/{sample}/{sample}_10k.bed"),
         cont=os.path.join(RESULTS_DIR,"Bins/{sample}/{sample}_10k.fa"),
@@ -102,9 +102,9 @@ rule metabinner_install:
 
 rule metabinner_coverage:
     input:
-        expand(os.path.join(RESULTS_DIR, "Bam/{sample}/{sample}.bam"), sample = SAMPLES)
+        os.path.join(RESULTS_DIR, "Bam/{sample}/{sample}.bam")
     output:
-        temp=temp(os.path.join(RESULTS_DIR,"Bins/{sample}/{sample}_metabinner_temp.txt")),
+        temp=os.path.join(RESULTS_DIR,"Bins/{sample}/{sample}_metabinner_temp.txt"),
         final=os.path.join(RESULTS_DIR,"Bins/{sample}/{sample}_metabinner_cov.txt")
     conda:
         os.path.join(ENV_DIR, "metabat.yaml")
@@ -128,9 +128,9 @@ rule metabinner_prepare:
         contig=os.path.join(RESULTS_DIR, "Assembly/concatanated_filter.fasta"),
         bin=rules.metabinner_install.output.dbs
     output:
-        cont_t=temp(RESULTS_DIR + "/Assembly" + "/{sample}_filter_" + str(config["metabinner"]["length"]) + ".fa"),        
+        cont_t=RESULTS_DIR + "/Assembly" + "/{sample}_filter_" + str(config["metabinner"]["length"]) + ".fa",        
         cont=RESULTS_DIR + "/Bins/{sample}/{sample}_metabinner_" + str(config["metabinner"]["length"]) +".fa",        
-        kmer_t=temp(RESULTS_DIR + "/Assembly" + "/{sample}_filter_kmer_4_f" + str(config["metabinner"]["length"]) + ".csv"),
+        kmer_t=RESULTS_DIR + "/Assembly" + "/{sample}_filter_kmer_4_f" + str(config["metabinner"]["length"]) + ".csv",
         kmer=RESULTS_DIR + "/Bins/{sample}/{sample}_kmer_4_f" + str(config["metabinner"]["length"]) + ".csv"
     conda:
         os.path.join(ENV_DIR, "metabinner.yaml")
