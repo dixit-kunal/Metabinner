@@ -1,4 +1,4 @@
-me: metabinner
+name: metabinner
 channels:
   - bioconda
   - conda-forge
@@ -6,4 +6,5 @@ channels:
 dependencies:
   - metabinner=1.4.3
   - pip=22.2.2
+  - pip:
     - click==8.1.3

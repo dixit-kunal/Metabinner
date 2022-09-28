@@ -128,9 +128,9 @@ rule metabinner_prepare:
         contig=os.path.join(RESULTS_DIR, "Assembly/concatanated_filter.fasta"),
         bin=rules.metabinner_install.output.dbs
     output:
-        cont_t=RESULTS_DIR + "/Assembly" + "/{sample}_filter_" + str(config["metabinner"]["length"]) + ".fa",        
+        cont_t=RESULTS_DIR + "/Assembly" + "/concatenated_filter_" + str(config["metabinner"]["length"]) + ".fa",        
         cont=RESULTS_DIR + "/Bins/{sample}/{sample}_metabinner_" + str(config["metabinner"]["length"]) +".fa",        
-        kmer_t=RESULTS_DIR + "/Assembly" + "/{sample}_filter_kmer_4_f" + str(config["metabinner"]["length"]) + ".csv",
+        kmer_t=RESULTS_DIR + "/Assembly" + "/concatenated_filter_kmer_4_f" + str(config["metabinner"]["length"]) + ".csv",
         kmer=RESULTS_DIR + "/Bins/{sample}/{sample}_kmer_4_f" + str(config["metabinner"]["length"]) + ".csv"
     conda:
         os.path.join(ENV_DIR, "metabinner.yaml")
