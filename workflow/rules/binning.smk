@@ -123,36 +123,79 @@ rule metabinner_coverage:
         """
 
 
+#rule metabinner_prepare:
+#    input:
+#        contig=os.path.join(RESULTS_DIR, "Assembly/concatanated_filter.fasta"),
+#        bin=rules.metabinner_install.output.dbs
+#    output:
+#        cont_t=RESULTS_DIR + "/Assembly" + "/concatenated_filter_" + str(config["metabinner"]["length"]) + ".fa",        
+#        cont=RESULTS_DIR + "/Bins/{sample}/{sample}_metabinner_" + str(config["metabinner"]["length"]) +".fa",        
+#        kmer_t=RESULTS_DIR + "/Assembly" + "/concatenated_filter_kmer_4_f" + str(config["metabinner"]["length"]) + ".csv",
+#        kmer=RESULTS_DIR + "/Bins/{sample}/{sample}_kmer_4_f" + str(config["metabinner"]["length"]) + ".csv"
+#    conda:
+#        os.path.join(ENV_DIR, "metabinner.yaml")
+#    threads:
+#        config["metabinner"]["threads"]
+#    log:
+#        out=os.path.join(RESULTS_DIR, "logs/metabinner_prepare/concatenated_filter.out.log"),
+#        err=os.path.join(RESULTS_DIR, "logs/metabinner_prepare/concatenated_filter.err.log")
+#    message:
+#        "Prepare fasta and kmer file for Metabinner"
+#    shell:
+#        "(date && python {input.bin}/scripts/Filter_tooshort.py {input.contig} {config[metabinner][length]} && "
+#        "cp {output.cont_t} {output.cont} && " 
+#        "python {input.bin}/scripts/gen_kmer.py {input.contig} {config[metabinner][length]} 4 && "
+#        "cp {output.kmer_t} {output.kmer} && date) 2> {log.err} > {log.out}"
+#
+#
+#rule metabinner:
+#    input:
+#        cont=rules.metabinner_prepare.output.cont,
+#        cov=rules.metabinner_coverage.output.final,
+#        kmer=rules.metabinner_prepare.output.kmer,    
+#        path=rules.metabinner_install.output.dbs
+#    output:
+#        os.path.join(RESULTS_DIR, "Bins/{sample}/Metabinner/metabinner_result.tsv")
+#    conda:
+#        os.path.join(ENV_DIR, "metabinner.yaml")
+#    log:
+#        out=os.path.join(RESULTS_DIR, "logs/metabinner/{sample}.out.log"),
+#        err=os.path.join(RESULTS_DIR, "logs/metabinner/{sample}.err.log")
+#    threads:
+#        config["metabinner"]["threads"]
+#    message:
+#        "Running Metabinner"
+#    shell:
+#        "(date && run_metabinner.sh -a {input.cont} -d {input.cov} -k {input.kmer} -p {input.path} -o $(dirname {output}) -t {threads} -s huge && "
+#        "mv $(dirname {output})/metabinner_res/* $(dirname {output}) && "
+#        "date) 2> {log.err} > {log.out}"
+
 rule metabinner_prepare:
     input:
         contig=os.path.join(RESULTS_DIR, "Assembly/concatanated_filter.fasta"),
         bin=rules.metabinner_install.output.dbs
     output:
-        cont_t=RESULTS_DIR + "/Assembly" + "/concatenated_filter_" + str(config["metabinner"]["length"]) + ".fa",        
-        cont=RESULTS_DIR + "/Bins/{sample}/{sample}_metabinner_" + str(config["metabinner"]["length"]) +".fa",        
+        cont_t=RESULTS_DIR + "/Assembly" + "/concatenated_filter_" + str(config["metabinner"]["length"]) + ".fa",
         kmer_t=RESULTS_DIR + "/Assembly" + "/concatenated_filter_kmer_4_f" + str(config["metabinner"]["length"]) + ".csv",
-        kmer=RESULTS_DIR + "/Bins/{sample}/{sample}_kmer_4_f" + str(config["metabinner"]["length"]) + ".csv"
     conda:
         os.path.join(ENV_DIR, "metabinner.yaml")
     threads:
         config["metabinner"]["threads"]
     log:
-        out=os.path.join(RESULTS_DIR, "logs/metabinner_prepare/{sample}.out.log"),
-        err=os.path.join(RESULTS_DIR, "logs/metabinner_prepare/{sample}.err.log")
+        out=os.path.join(RESULTS_DIR, "logs/metabinner_prepare/concatenated_filter.out.log"),
+        err=os.path.join(RESULTS_DIR, "logs/metabinner_prepare/concatenated_filter.err.log")
     message:
         "Prepare fasta and kmer file for Metabinner"
     shell:
         "(date && python {input.bin}/scripts/Filter_tooshort.py {input.contig} {config[metabinner][length]} && "
-        "cp {output.cont_t} {output.cont} && " 
-        "python {input.bin}/scripts/gen_kmer.py {input.contig} {config[metabinner][length]} 4 && "
-        "cp {output.kmer_t} {output.kmer} && date) 2> {log.err} > {log.out}"
+        "python {input.bin}/scripts/gen_kmer.py {input.contig} {config[metabinner][length]} 4 && date) 2> {log.err} > {log.out}"
 
 
 rule metabinner:
     input:
-        cont=rules.metabinner_prepare.output.cont,
+        cont=rules.metabinner_prepare.output.cont_t,
         cov=rules.metabinner_coverage.output.final,
-        kmer=rules.metabinner_prepare.output.kmer,    
+        kmer=rules.metabinner_prepare.output.kmer_t,
         path=rules.metabinner_install.output.dbs
     output:
         os.path.join(RESULTS_DIR, "Bins/{sample}/Metabinner/metabinner_result.tsv")
